@@ -114,5 +114,29 @@ defmodule BlogApiWeb.Schema do
 
       resolve(&BlogApi.PostResolver.delete/2)
     end
+
+    @desc "Update comment"
+    field :update_comment, type: :comment do
+      arg(:id, non_null(:integer))
+      arg(:comment, :update_comment_params)
+
+      resolve(&BlogApi.CommentResolver.update/2)
+    end
+
+    @desc "Create comment"
+    field :create_comment, type: :comment do
+      arg(:body, non_null(:string))
+      arg(:user_id, non_null(:integer))
+      arg(:post_id, non_null(:integer))
+
+      resolve(&BlogApi.CommentResolver.create/2)
+    end
+
+    @desc "Delete comment"
+    field :delete_comment, type: :comment do
+      arg(:id, non_null(:id))
+
+      resolve(&BlogApi.CommentResolver.delete/2)
+    end
   end
 end
